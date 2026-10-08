@@ -30,115 +30,156 @@
   </header>
 
   <!-- CADASTRO -->
-  <section class="auth">
-    <div class="container">
-      <div class="auth__wrapper">
+  <section class="registration">
+    <div class="container registration__inner">
 
-        <!-- Lado informativo -->
-        <aside class="auth__side">
-          <div>
-            <h2>Comece sua jornada no inglês hoje mesmo.</h2>
-            <p>Crie sua conta e tenha acesso ao seu cronograma individual, materiais exclusivos e acompanhamento completo da sua evolução.</p>
-          </div>
-
-          <div class="auth__side-list">
-            <div class="auth__side-item">
-              <span>📅</span> Cronograma de aulas personalizado
-            </div>
-            <div class="auth__side-item">
-              <span>📄</span> Materiais em PDF por nível
-            </div>
-            <div class="auth__side-item">
-              <span>📊</span> Boletim sempre atualizado
-            </div>
-          </div>
-        </aside>
-
-        <!-- Formulário -->
-        <div class="auth__form">
-          <h1>Criar conta de aluno</h1>
-          <p class="auth__subtitle">Preencha seus dados para solicitar matrícula.</p>
-
-          <form method="POST" action="{{ route('register') }}" novalidate>
-            @csrf
-
-            <div class="field @error('name') field--error @enderror">
-              <label for="name">Nome completo</label>
-              <input type="text" id="name" name="name" value="{{ old('name') }}" placeholder="Seu nome completo" required autofocus>
-              @error('name')
-                <span class="field__error-msg">{{ $message }}</span>
-              @enderror
-            </div>
-
-            <div class="form-row">
-              <div class="field @error('email') field--error @enderror">
-                <label for="email">E-mail</label>
-                <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="voce@email.com" required>
-                @error('email')
-                  <span class="field__error-msg">{{ $message }}</span>
-                @enderror
-              </div>
-              <div class="field @error('telefone') field--error @enderror">
-                <label for="telefone">Telefone / WhatsApp</label>
-                <input type="tel" id="telefone" name="telefone" value="{{ old('telefone') }}" placeholder="(00) 00000-0000" required>
-                @error('telefone')
-                  <span class="field__error-msg">{{ $message }}</span>
-                @enderror
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="field @error('idade') field--error @enderror">
-                <label for="idade">Idade</label>
-                <input type="number" id="idade" name="idade" value="{{ old('idade') }}" placeholder="Ex: 22" min="4" max="99" required>
-                @error('idade')
-                  <span class="field__error-msg">{{ $message }}</span>
-                @enderror
-              </div>
-              <div class="field @error('nivel') field--error @enderror">
-                <label for="nivel">Nível de inglês</label>
-                <select id="nivel" name="nivel" required>
-                  <option value="" disabled {{ old('nivel') ? '' : 'selected' }}>Selecione</option>
-                  <option value="iniciante" {{ old('nivel') == 'iniciante' ? 'selected' : '' }}>Iniciante</option>
-                  <option value="basico" {{ old('nivel') == 'basico' ? 'selected' : '' }}>Básico</option>
-                  <option value="intermediario" {{ old('nivel') == 'intermediario' ? 'selected' : '' }}>Intermediário</option>
-                  <option value="avancado" {{ old('nivel') == 'avancado' ? 'selected' : '' }}>Avançado</option>
-                  <option value="nao-sei" {{ old('nivel') == 'nao-sei' ? 'selected' : '' }}>Não sei / nunca estudei</option>
-                </select>
-                @error('nivel')
-                  <span class="field__error-msg">{{ $message }}</span>
-                @enderror
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="field @error('password') field--error @enderror">
-                <label for="password">Senha</label>
-                <input type="password" id="password" name="password" placeholder="Mínimo 8 caracteres" minlength="8" required>
-                @error('password')
-                  <span class="field__error-msg">{{ $message }}</span>
-                @enderror
-              </div>
-              <div class="field">
-                <label for="password_confirmation">Confirmar senha</label>
-                <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Repita a senha" minlength="8" required>
-              </div>
-            </div>
-
-            <div class="field-check">
-              <input type="checkbox" id="termos" name="termos" required>
-              <label for="termos">Li e concordo com os <a href="#">Termos de Uso</a> e a <a href="#">Política de Privacidade</a>.</label>
-            </div>
-
-            <button type="submit" class="btn btn--primary btn--block">Criar minha conta</button>
-
-            <p class="auth__footer-text">
-              Já tem uma conta? <a href="{{ route('login') }}">Entrar</a>
-            </p>
-          </form>
-        </div>
-
+      <div class="registration__heading">
+        <span class="eyebrow">Escola de inglês particular</span>
+        <h1>Criar conta de aluno</h1>
+        <p>Preencha seus dados para solicitar matrícula na English School.</p>
       </div>
+
+      <form class="registration__form" method="POST" action="{{ route('register') }}" novalidate>
+        @csrf
+
+        @if ($errors->any())
+          <div class="form-status" role="alert">
+            Encontramos {{ $errors->count() === 1 ? '1 problema' : $errors->count().' problemas' }} no formulário. Confira os campos destacados abaixo.
+          </div>
+        @endif
+
+        <!-- DADOS PESSOAIS -->
+        <fieldset>
+          <legend>Dados pessoais</legend>
+
+          <div class="form-grid">
+            <div class="field field--full">
+              <label for="name">Nome completo <span>*</span></label>
+              <input
+                type="text" id="name" name="name"
+                value="{{ old('name') }}"
+                placeholder="Seu nome completo"
+                aria-invalid="{{ $errors->has('name') ? 'true' : 'false' }}"
+                required autofocus>
+              <span class="field__error">@error('name'){{ $message }}@enderror</span>
+            </div>
+
+            <div class="field">
+              <label for="email">E-mail <span>*</span></label>
+              <input
+                type="email" id="email" name="email"
+                value="{{ old('email') }}"
+                placeholder="voce@email.com"
+                aria-invalid="{{ $errors->has('email') ? 'true' : 'false' }}"
+                required>
+              <span class="field__error">@error('email'){{ $message }}@enderror</span>
+            </div>
+
+            <div class="field">
+              <label for="telefone">Telefone / WhatsApp <span>*</span></label>
+              <input
+                type="tel" id="telefone" name="telefone"
+                value="{{ old('telefone') }}"
+                placeholder="(00) 00000-0000"
+                aria-invalid="{{ $errors->has('telefone') ? 'true' : 'false' }}"
+                required>
+              <span class="field__error">@error('telefone'){{ $message }}@enderror</span>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- DADOS DO CURSO -->
+        <fieldset>
+          <legend>Dados do curso</legend>
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="idade">Idade <span>*</span></label>
+              <input
+                type="number" id="idade" name="idade"
+                value="{{ old('idade') }}"
+                placeholder="Ex: 22" min="4" max="99"
+                aria-invalid="{{ $errors->has('idade') ? 'true' : 'false' }}"
+                required>
+              <span class="field__error">@error('idade'){{ $message }}@enderror</span>
+            </div>
+
+            <div class="field">
+              <label for="nivel">Nível de inglês <span>*</span></label>
+              <select
+                id="nivel" name="nivel"
+                aria-invalid="{{ $errors->has('nivel') ? 'true' : 'false' }}"
+                required>
+                <option value="" disabled {{ old('nivel') ? '' : 'selected' }}>Selecione</option>
+                <option value="iniciante" {{ old('nivel') == 'iniciante' ? 'selected' : '' }}>Iniciante</option>
+                <option value="basico" {{ old('nivel') == 'basico' ? 'selected' : '' }}>Básico</option>
+                <option value="intermediario" {{ old('nivel') == 'intermediario' ? 'selected' : '' }}>Intermediário</option>
+                <option value="avancado" {{ old('nivel') == 'avancado' ? 'selected' : '' }}>Avançado</option>
+                <option value="nao-sei" {{ old('nivel') == 'nao-sei' ? 'selected' : '' }}>Não sei / nunca estudei</option>
+              </select>
+              <span class="field__error">@error('nivel'){{ $message }}@enderror</span>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- ACESSO -->
+        <fieldset>
+          <legend>Acesso à plataforma</legend>
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="password">Senha <span>*</span></label>
+              <div class="password-field">
+                <input
+                  type="password" id="password" name="password"
+                  placeholder="Mínimo 8 caracteres" minlength="8"
+                  aria-invalid="{{ $errors->has('password') ? 'true' : 'false' }}"
+                  required>
+                <button type="button" class="password-toggle" data-password-toggle="password" aria-label="Mostrar senha" aria-pressed="false">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                </button>
+              </div>
+              <span class="field__error">@error('password'){{ $message }}@enderror</span>
+            </div>
+
+            <div class="field">
+              <label for="password_confirmation">Confirmar senha <span>*</span></label>
+              <div class="password-field">
+                <input
+                  type="password" id="password_confirmation" name="password_confirmation"
+                  placeholder="Repita a senha" minlength="8"
+                  required>
+                <button type="button" class="password-toggle" data-password-toggle="password_confirmation" aria-label="Mostrar senha" aria-pressed="false">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="field field--full">
+              <label for="termos" style="display:flex; align-items:flex-start; gap:10px; font-weight:400;">
+                <input type="checkbox" id="termos" name="termos" style="width:auto; height:auto; margin-top:3px; accent-color: var(--color-red);" required>
+                <span>Li e concordo com os <a href="#" style="color: var(--color-red); font-weight:600;">Termos de Uso</a> e a <a href="#" style="color: var(--color-red); font-weight:600;">Política de Privacidade</a>.</span>
+              </label>
+              <span class="field__error">@error('termos'){{ $message }}@enderror</span>
+            </div>
+          </div>
+        </fieldset>
+
+        <p class="form-required">Campos marcados com <span style="color: var(--color-red);">*</span> são obrigatórios.</p>
+
+        <button type="submit" class="btn btn--primary registration__submit">Criar minha conta</button>
+
+        <p class="registration__login">
+          Já tem uma conta? <a href="{{ route('login') }}">Entrar</a>
+        </p>
+      </form>
+
     </div>
   </section>
 
@@ -172,5 +213,17 @@
   </footer>
 
   <script src="{{ asset('js/script.js') }}"></script>
+  <script>
+    // Alterna visibilidade dos campos de senha
+    document.querySelectorAll('[data-password-toggle]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var input = document.getElementById(btn.getAttribute('data-password-toggle'));
+        var showing = input.type === 'text';
+        input.type = showing ? 'password' : 'text';
+        btn.setAttribute('aria-pressed', String(!showing));
+        btn.setAttribute('aria-label', showing ? 'Mostrar senha' : 'Ocultar senha');
+      });
+    });
+  </script>
 </body>
 </html>
