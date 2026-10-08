@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
@@ -29,23 +30,36 @@ class RegisteredUserController extends Controller
      * @throws ValidationException
      */
     public function store(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+{
+    $request->validate([
+        'name'      => ['required', 'string', 'min:3', 'max:120'],
+        'email'     => ['required', 'string', 'lowercase', 'email', 'max:254', 'unique:'.User::class],
+        'phone'     => ['required', 'string', 'max:25'],
+        'birthdate' => ['required', 'date', 'before:today'],
+        'level'     => ['required', 'in:unknown,A1,A2,B1,B2,C1,C2'],
+        'password'  => ['required', 'confirmed', Rules\Password::min(8)->letters()->numbers()],
+    ]);
 
+    $user = DB::transaction(function () use ($request) {
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
+            'name'     => $request->name,
+            'email'    => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
-        event(new Registered($user));
+        $user->studentProfile()->create([
+            'phone'     => $request->phone,
+            'birthdate' => $request->birthdate,
+            'level'     => $request->level,
+        ]);
 
-        Auth::login($user);
+        return $user;
+    });
 
-        return redirect(route('dashboard', absolute: false));
-    }
+    event(new Registered($user));
+    Auth::login($user);
+
+    return redirect(route('dashboard', absolute: false));
+}
+
 }

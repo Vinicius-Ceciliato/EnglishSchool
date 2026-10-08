@@ -31,9 +31,10 @@ class User extends Authenticatable
     }
 
     public function studentProfile()
-    {
-        return $this->hasOne(StudentProfile::class);
-    }
+{
+    return $this->hasOne(\App\Models\StudentProfile::class);
+}
+
 
     public function schedules()
     {
@@ -44,5 +45,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Grade::class, 'student_id');
     }
+
+    
 }
 
