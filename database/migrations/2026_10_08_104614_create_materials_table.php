@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('materials', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->string('file_path'); // caminho do PDF armazenado
+            $table->string('level')->nullable(); // relacionar ao nível de inglês
+            $table->foreignId('uploaded_by')->constrained('users');
             $table->timestamps();
         });
     }

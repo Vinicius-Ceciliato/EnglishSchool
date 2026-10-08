@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('student_profiles', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->unsignedTinyInteger('age')->nullable();
+            $table->string('english_level')->nullable(); // ex: iniciante, intermediário, avançado
+            $table->boolean('payment_up_to_date')->default(false);
+            $table->date('payment_due_date')->nullable();
             $table->timestamps();
         });
     }

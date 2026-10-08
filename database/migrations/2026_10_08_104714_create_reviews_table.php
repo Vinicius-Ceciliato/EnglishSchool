@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
+            $table->string('author_name');
+            $table->unsignedTinyInteger('rating'); // 1 a 5
+            $table->text('comment');
+            $table->boolean('approved')->default(false); // admin aprova antes de exibir
             $table->timestamps();
         });
     }

@@ -29,4 +29,20 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function studentProfile()
+    {
+        return $this->hasOne(StudentProfile::class);
+    }
+
+    public function schedules()
+    {
+        return $this->hasMany(Schedule::class, 'student_id');
+    }
+
+    public function grades()
+    {
+        return $this->hasMany(Grade::class, 'student_id');
+    }
 }
+

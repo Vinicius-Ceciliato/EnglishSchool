@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('grades', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('student_id')->constrained('users');
+            $table->string('term'); // ex: "1º bimestre"
+            $table->decimal('score', 4, 2);
+            $table->text('comments')->nullable();
             $table->timestamps();
         });
     }

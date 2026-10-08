@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('student_id')->constrained('users');
+            $table->dateTime('class_date');
+            $table->string('subject')->nullable();
+            $table->string('teacher_name')->nullable();
             $table->timestamps();
         });
     }
