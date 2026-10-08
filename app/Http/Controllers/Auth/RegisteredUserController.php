@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\StudentProfile;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
-use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
@@ -27,39 +26,41 @@ class RegisteredUserController extends Controller
     /**
      * Handle an incoming registration request.
      *
-     * @throws ValidationException
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request): RedirectResponse
-{
-    $request->validate([
-        'name'      => ['required', 'string', 'min:3', 'max:120'],
-        'email'     => ['required', 'string', 'lowercase', 'email', 'max:254', 'unique:'.User::class],
-        'phone'     => ['required', 'string', 'max:25'],
-        'birthdate' => ['required', 'date', 'before:today'],
-        'level'     => ['required', 'in:unknown,A1,A2,B1,B2,C1,C2'],
-        'password'  => ['required', 'confirmed', Rules\Password::min(8)->letters()->numbers()],
-    ]);
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
+            'telefone' => 'required|string|max:20',
+            'idade' => 'required|integer|min:4|max:99',
+            'nivel' => 'required|string|in:iniciante,basico,intermediario,avancado,nao-sei',
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'termos' => 'required|accepted',
+        ]);
 
-    $user = DB::transaction(function () use ($request) {
+        // Cria o usuário (sempre como "student" neste formulário público)
         $user = User::create([
-            'name'     => $request->name,
-            'email'    => $request->email,
+            'name' => $request->name,
+            'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => 'student',
         ]);
 
-        $user->studentProfile()->create([
-            'phone'     => $request->phone,
-            'birthdate' => $request->birthdate,
-            'level'     => $request->level,
+        // Cria o perfil de aluno vinculado
+        StudentProfile::create([
+            'user_id' => $user->id,
+            'phone' => $request->telefone,
+            'age' => $request->idade,
+            'english_level' => $request->nivel,
+            'payment_up_to_date' => false,
         ]);
 
-        return $user;
-    });
+        event(new Registered($user));
 
-    event(new Registered($user));
-    Auth::login($user);
+        Auth::login($user);
 
-    return redirect(route('dashboard', absolute: false));
-}
-
+        return redirect(route('dashboard', absolute: false));
+    }
 }

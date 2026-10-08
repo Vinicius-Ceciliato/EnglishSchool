@@ -10,7 +10,6 @@ class StudentProfile extends Model
     {
         return $this->belongsTo(User::class);
     }
-        protected $fillable = ['user_id', 'phone', 'birthdate', 'level'];
-}
+protected $fillable = ['user_id', 'phone', 'age', 'english_level', 'payment_up_to_date', 'payment_due_date'];}
         
         
