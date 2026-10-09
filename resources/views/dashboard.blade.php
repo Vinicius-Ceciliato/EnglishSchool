@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 </head>
 <body>
-  <h1>Painel do Administrador</h1>
+  <h1>Painel do aluno</h1>
   <p>Bem-vindo, {{ auth()->user()->name }}!</p>
   <form method="POST" action="{{ route('logout') }}">
     @csrf
