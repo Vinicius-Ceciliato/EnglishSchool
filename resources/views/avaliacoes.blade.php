@@ -72,6 +72,44 @@
     </div>
   </section>
 
+  @auth
+  <section class="highlights" style="padding-top: 0;">
+    <div class="container">
+      <div class="highlight-card" style="max-width: 600px; margin: 0 auto;">
+        <h3 style="margin-bottom: 16px;">Deixe sua avaliação</h3>
+
+        @if (session('status'))
+          <div class="form-status">{{ session('status') }}</div>
+        @endif
+
+        <form method="POST" action="{{ route('avaliacoes.store') }}">
+          @csrf
+          <div class="field">
+            <label for="rating">Sua nota</label>
+            <select id="rating" name="rating" required>
+              <option value="5">5 — Excelente</option>
+              <option value="4">4 — Muito bom</option>
+              <option value="3">3 — Bom</option>
+              <option value="2">2 — Regular</option>
+              <option value="1">1 — Ruim</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="comment">Comentário</label>
+            <textarea id="comment" name="comment" rows="4" required
+              style="width:100%; padding:12px; border:1.5px solid var(--color-border); border-radius:var(--radius-sm); font-family:inherit;"></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary">Enviar avaliação</button>
+        </form>
+      </div>
+    </div>
+  </section>
+@else
+  <section class="highlights" style="padding-top: 0; text-align:center;">
+    <p>Quer deixar sua avaliação? <a href="{{ route('login') }}" style="color: var(--color-red); font-weight:600;">Faça login</a> primeiro.</p>
+  </section>
+@endauth
+
   <!-- CTA -->
   <section class="cta-band">
     <div class="container cta-band__inner">

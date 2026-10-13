@@ -28,5 +28,10 @@ Route::middleware('auth')->group(function () {
 
 Route::view('/sobre', 'sobre')->name('sobre');
 Route::view('/avaliacoes', 'avaliacoes')->name('avaliacoes');
+use App\Http\Controllers\ReviewController;
+
+Route::post('/avaliacoes', [ReviewController::class, 'store'])
+    ->middleware('auth')
+    ->name('avaliacoes.store');
 
 require __DIR__.'/auth.php';
