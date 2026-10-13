@@ -101,8 +101,8 @@
 
       <div class="footer__col">
         <h4>Navegação</h4>
-        <a href="{{ url('/sobre') }}">Sobre Nós</a>
-        <a href="{{ url('/avaliacoes') }}">Avaliações</a>
+        <a href="{{ route('sobre') }}">Sobre Nós</a>
+        <a href="{{ route('avaliacoes') }}">Avaliações</a>
         <a href="{{ route('register') }}">Cadastre-se</a>
         <a href="{{ route('login') }}">Entrar</a>
       </div>
