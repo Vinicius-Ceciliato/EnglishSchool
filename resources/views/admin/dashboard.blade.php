@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Painel do Administrador | English School</title>
+  <title>Painel do Administrador | Learn English with Fernanda Ceciliato</title>
   <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 </head>
 <body>
@@ -11,12 +11,12 @@
   <!-- HEADER -->
   <header class="header">
     <div class="container header__inner">
-      <a href="{{ route('admin.dashboard') }}" class="logo">English<span>School</span></a>
+      <a href="{{ route('admin.dashboard') }}" class="logo">Learn<span>English</span></a>
 
       <nav class="nav" id="nav">
         <a href="{{ route('admin.dashboard') }}" class="nav__link nav__link--active">Painel</a>
-        <a href="#" class="nav__link">Alunos</a>
-        <a href="#" class="nav__link">Materiais</a>
+<a href="{{ route('admin.students.index') }}" class="nav__link">Alunos</a>       
+   <a href="{{ route('admin.materials.index') }} " class="nav__link">Materiais</a>
         <a href="#" class="nav__link">Cronograma</a>
         <a href="#" class="nav__link">Boletins</a>
       </nav>
@@ -38,18 +38,18 @@
     <div class="container">
       <span class="eyebrow">Área restrita</span>
       <h1 style="font-size: 2rem;">Olá, {{ auth()->user()->name }}</h1>
-      <p class="hero__text">Painel de administração da English School.</p>
+      <p class="hero__text">Painel de administração da Learn English.</p>
     </div>
   </section>
 
   <section class="highlights">
     <div class="container highlights__grid">
-      <a href="#" class="highlight-card" style="text-decoration:none; color:inherit;">
+      <a href="{{ route('admin.students.index') }}" class="highlight-card" style="text-decoration:none; color:inherit;">
         <div class="highlight-card__icon">👥</div>
         <h3>Controle de alunos</h3>
         <p>Cadastre, edite ou remova alunos. Veja status de pagamento e dados básicos.</p>
       </a>
-      <a href="#" class="highlight-card" style="text-decoration:none; color:inherit;">
+      <a href="{{ route('admin.materials.index') }}" class="highlight-card" style="text-decoration:none; color:inherit;">
         <div class="highlight-card__icon">📄</div>
         <h3>Materiais</h3>
         <p>Faça upload de PDFs e organize por nível de curso.</p>

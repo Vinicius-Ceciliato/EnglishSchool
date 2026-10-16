@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Minha Área | English School</title>
+  <title>Minha Área | Learn English with Fernanda Ceciliato</title>
   <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 </head>
 <body>
@@ -27,12 +27,12 @@
   <!-- HEADER -->
   <header class="header">
     <div class="container header__inner">
-      <a href="{{ route('dashboard') }}" class="logo">English<span>School</span></a>
+      <a href="{{ route('dashboard') }}" class="logo">Learn<span>English</span></a>
 
       <nav class="nav" id="nav">
         <a href="{{ route('dashboard') }}" class="nav__link nav__link--active">Minha Área</a>
         <a href="#cronograma" class="nav__link">Cronograma</a>
-        <a href="#materiais" class="nav__link">Materiais</a>
+        <a href="{{ route('materiais.index') }}" class="nav__link">Materiais</a>
         <a href="#boletim" class="nav__link">Boletim</a>
       </nav>
 
@@ -95,7 +95,7 @@
           <p>Veja os dias e horários das suas próximas aulas.</p>
         </a>
 
-        <a id="materiais" href="#" class="highlight-card" style="text-decoration:none; color:inherit;">
+        <a id="materiais" href="{{ route('materiais.index') }}" class="highlight-card" style="text-decoration:none; color:inherit;">
           <div class="highlight-card__icon">📄</div>
           <h3>Materiais do curso</h3>
           <p>Acesse os PDFs disponibilizados para o seu nível.</p>
@@ -114,7 +114,7 @@
   <footer class="footer">
     <div class="container footer__inner">
       <div>
-        <a href="{{ url('/') }}" class="logo logo--footer">English<span>School</span></a>
+        <a href="{{ url('/') }}" class="logo logo--footer">Learn<span>English</span></a>
         <p>Escola particular de inglês. Aulas pensadas para o seu ritmo.</p>
       </div>
 
@@ -126,13 +126,13 @@
 
       <div class="footer__col">
         <h4>Contato</h4>
-        <a href="mailto:contato@englishschool.com">contato@englishschool.com</a>
-        <a href="tel:+5500000000000">(00) 00000-0000</a>
+        <a href="mailto:teacher.fernandaceciliato@gmail.com">teacher.fernandaceciliato@gmail.com</a>
+        <a href="tel:+55 (15) 99767-7833">+55 (15) 99767-7833</a>
       </div>
     </div>
     <div class="footer__bottom">
       <div class="container">
-        <p>&copy; <span id="year"></span> English School. Todos os direitos reservados.</p>
+        <p>&copy; <span id="year"></span> Learn English with Fernanda Ceciliato. Todos os direitos reservados.</p>
       </div>
     </div>
   </footer>
