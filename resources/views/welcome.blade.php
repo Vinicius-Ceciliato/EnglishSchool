@@ -11,7 +11,9 @@
   <!-- HEADER -->
   <header class="header">
     <div class="container header__inner">
-      <a href="{{ url('/') }}" class="logo">Learn<span>English</span></a>
+      <a href="{{ url('/') }}" class="logo"><img src="{{ asset('images/logo.jpeg') }}" alt="Logo" width="120" >
+</a>
+      
 
       <nav class="nav" id="nav">
         <a href="{{ url('/') }}" class="nav__link nav__link--active">Início</a>
@@ -95,7 +97,7 @@
   <footer class="footer">
     <div class="container footer__inner">
       <div>
-        <a href="{{ url('/') }}" class="logo logo--footer">Learn<span>English</span></a>
+        <a href="{{ url('/') }}" class="logo logo--footer"><img src="{{ asset('images/logo.jpeg') }}" alt="Logo" width="120"></a>
         <p>Escola particular de inglês. Aulas pensadas para o seu ritmo.</p>
       </div>
 
