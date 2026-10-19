@@ -31,7 +31,7 @@
 
       <nav class="nav" id="nav">
         <a href="{{ route('dashboard') }}" class="nav__link nav__link--active">Minha Área</a>
-        <a href="#cronograma" class="nav__link">Cronograma</a>
+        <a href="{{ route('cronograma.index') }}" class="nav__link">Cronograma</a>
         <a href="{{ route('materiais.index') }}" class="nav__link">Materiais</a>
         <a href="#boletim" class="nav__link">Boletim</a>
       </nav>
@@ -89,7 +89,7 @@
 
       <!-- MÓDULOS -->
       <div class="highlights__grid">
-        <a id="cronograma" href="#" class="highlight-card" style="text-decoration:none; color:inherit;">
+        <a id="cronograma" href="{{ route('cronograma.index') }}" class="highlight-card" style="text-decoration:none; color:inherit;">
           <div class="highlight-card__icon">📅</div>
           <h3>Meu cronograma</h3>
           <p>Veja os dias e horários das suas próximas aulas.</p>
@@ -115,7 +115,7 @@
     <div class="container footer__inner">
       <div>
         <a href="{{ url('/') }}" class="logo logo--footer"><img src="{{ asset('images/logo.jpeg') }}" alt="Logo" width="120"></a>
-        <p>Escola particular de inglês. Aulas pensadas para o seu ritmo.</p>
+        <p>Aulas particulares de inglês. Aulas pensadas para o seu ritmo.</p>
       </div>
 
       <div class="footer__col">
@@ -127,7 +127,7 @@
       <div class="footer__col">
         <h4>Contato</h4>
         <a href="mailto:teacher.fernandaceciliato@gmail.com">teacher.fernandaceciliato@gmail.com</a>
-        <a href="tel:+55 (15) 99767-7833">+55 (15) 99767-7833</a>
+        <a href="tel:+5515997677833">(15) 99767-7833</a>
       </div>
     </div>
     <div class="footer__bottom">

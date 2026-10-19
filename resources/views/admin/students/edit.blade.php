@@ -19,7 +19,7 @@
         <a href="{{ route('admin.dashboard') }}" class="nav__link">Painel</a>
         <a href="{{ route('admin.students.index') }}" class="nav__link nav__link--active">Alunos</a>
         <a href="{{ route('admin.materials.index') }}" class="nav__link">Materiais</a>
-        <a href="#" class="nav__link">Cronograma</a>
+        <a href="{{ route('admin.schedules.index') }}" class="nav__link">Cronograma</a>
         <a href="#" class="nav__link">Boletins</a>
       </nav>
 

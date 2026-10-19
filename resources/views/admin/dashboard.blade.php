@@ -15,9 +15,9 @@
 
       <nav class="nav" id="nav">
         <a href="{{ route('admin.dashboard') }}" class="nav__link nav__link--active">Painel</a>
-<a href="{{ route('admin.students.index') }}" class="nav__link">Alunos</a>       
-   <a href="{{ route('admin.materials.index') }} " class="nav__link">Materiais</a>
-        <a href="#" class="nav__link">Cronograma</a>
+        <a href="{{ route('admin.students.index') }}" class="nav__link">Alunos</a>
+        <a href="{{ route('admin.materials.index') }}" class="nav__link">Materiais</a>
+        <a href="{{ route('admin.schedules.index') }}" class="nav__link">Cronograma</a>
         <a href="#" class="nav__link">Boletins</a>
       </nav>
 
@@ -38,7 +38,7 @@
     <div class="container">
       <span class="eyebrow">Área restrita</span>
       <h1 style="font-size: 2rem;">Olá, {{ auth()->user()->name }}</h1>
-      <p class="hero__text">Painel de administração da Learn English.</p>
+      <p class="hero__text">Painel de administração do Learn English with Fernanda Ceciliato.</p>
     </div>
   </section>
 
@@ -54,7 +54,7 @@
         <h3>Materiais</h3>
         <p>Faça upload de PDFs e organize por nível de curso.</p>
       </a>
-      <a href="#" class="highlight-card" style="text-decoration:none; color:inherit;">
+      <a href="{{ route('admin.schedules.index') }}" class="highlight-card" style="text-decoration:none; color:inherit;">
         <div class="highlight-card__icon">📅</div>
         <h3>Cronograma</h3>
         <p>Defina quando e para quem as aulas acontecem.</p>
