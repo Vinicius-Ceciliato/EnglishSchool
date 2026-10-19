@@ -11,7 +11,7 @@
   <!-- HEADER -->
   <header class="header">
     <div class="container header__inner">
-      <a href="{{ route('admin.dashboard') }}" class="logo">Learn<span>English</span></a>
+      <a href="{{ route('admin.dashboard') }}" class="logo"><img src="{{ asset('images/logo.jpeg') }}" alt="Logo" width="120"></a>
 
       <nav class="nav" id="nav">
         <a href="{{ route('admin.dashboard') }}" class="nav__link nav__link--active">Painel</a>
