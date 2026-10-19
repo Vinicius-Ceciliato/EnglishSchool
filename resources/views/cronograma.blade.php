@@ -17,7 +17,7 @@
         <a href="{{ route('dashboard') }}" class="nav__link">Minha Área</a>
         <a href="{{ route('cronograma.index') }}" class="nav__link nav__link--active">Cronograma</a>
         <a href="{{ route('materiais.index') }}" class="nav__link">Materiais</a>
-        <a href="#" class="nav__link">Boletim</a>
+        <a href="{{ route('boletim.index') }}" class="nav__link">Boletim</a>
       </nav>
 
       <div class="header__actions">

@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\GradeController;
 use App\Http\Controllers\Admin\MaterialController;
 use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StudentGradeController;
 use App\Http\Controllers\StudentMaterialController;
 use App\Http\Controllers\StudentScheduleController;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +31,9 @@ Route::middleware('auth')->group(function () {
 
     // Cronograma (cada aluno vê somente o seu)
     Route::get('/cronograma', [StudentScheduleController::class, 'index'])->name('cronograma.index');
+
+    // Boletim (cada aluno vê somente o seu)
+    Route::get('/boletim', [StudentGradeController::class, 'index'])->name('boletim.index');
 
     // Materiais (aluno vê os seus; admin também consegue abrir)
     Route::get('/materiais', [StudentMaterialController::class, 'index'])->name('materiais.index');
@@ -63,6 +68,14 @@ Route::middleware(['auth', 'admin'])
         Route::delete('/schedules/entries/{schedule}', [ScheduleController::class, 'destroy'])->name('schedules.destroy');
         Route::get('/schedules/{student}', [ScheduleController::class, 'show'])->name('schedules.show');
         Route::post('/schedules/{student}', [ScheduleController::class, 'store'])->name('schedules.store');
+
+        // Boletim (admin vê e altera o de todos os alunos)
+        Route::get('/grades', [GradeController::class, 'index'])->name('grades.index');
+        Route::get('/grades/entries/{grade}/edit', [GradeController::class, 'edit'])->name('grades.edit');
+        Route::put('/grades/entries/{grade}', [GradeController::class, 'update'])->name('grades.update');
+        Route::delete('/grades/entries/{grade}', [GradeController::class, 'destroy'])->name('grades.destroy');
+        Route::get('/grades/{student}', [GradeController::class, 'show'])->name('grades.show');
+        Route::post('/grades/{student}', [GradeController::class, 'store'])->name('grades.store');
     });
 
 require __DIR__.'/auth.php';

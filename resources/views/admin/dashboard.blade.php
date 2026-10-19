@@ -18,7 +18,7 @@
         <a href="{{ route('admin.students.index') }}" class="nav__link">Alunos</a>
         <a href="{{ route('admin.materials.index') }}" class="nav__link">Materiais</a>
         <a href="{{ route('admin.schedules.index') }}" class="nav__link">Cronograma</a>
-        <a href="#" class="nav__link">Boletins</a>
+        <a href="{{ route('admin.grades.index') }}" class="nav__link">Boletins</a>
       </nav>
 
       <div class="header__actions">
@@ -59,7 +59,7 @@
         <h3>Cronograma</h3>
         <p>Defina quando e para quem as aulas acontecem.</p>
       </a>
-      <a href="#" class="highlight-card" style="text-decoration:none; color:inherit;">
+      <a href="{{ route('admin.grades.index') }}" class="highlight-card" style="text-decoration:none; color:inherit;">
         <div class="highlight-card__icon">📊</div>
         <h3>Boletins</h3>
         <p>Lance notas e acompanhamento de cada aluno.</p>

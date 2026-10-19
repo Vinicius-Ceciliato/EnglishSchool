@@ -33,7 +33,7 @@
         <a href="{{ route('dashboard') }}" class="nav__link nav__link--active">Minha Área</a>
         <a href="{{ route('cronograma.index') }}" class="nav__link">Cronograma</a>
         <a href="{{ route('materiais.index') }}" class="nav__link">Materiais</a>
-        <a href="#boletim" class="nav__link">Boletim</a>
+        <a href="{{ route('boletim.index') }}" class="nav__link">Boletim</a>
       </nav>
 
       <div class="header__actions">
@@ -101,7 +101,7 @@
           <p>Acesse os PDFs disponibilizados para o seu nível.</p>
         </a>
 
-        <a id="boletim" href="#" class="highlight-card" style="text-decoration:none; color:inherit;">
+        <a id="boletim" href="{{ route('boletim.index') }}" class="highlight-card" style="text-decoration:none; color:inherit;">
           <div class="highlight-card__icon">📊</div>
           <h3>Meu boletim</h3>
           <p>Acompanhe suas notas e avaliações por etapa.</p>
@@ -114,7 +114,7 @@
   <footer class="footer">
     <div class="container footer__inner">
       <div>
-        <a href="{{ url('/') }}" class="logo logo--footer"><img src="{{ asset('images/logo.jpeg') }}" alt="Logo" width="120"></a>
+        <a href="{{ url('/') }}" class="logo logo--footer">Learn English <span>with Fernanda Ceciliato</span></a>
         <p>Aulas particulares de inglês. Aulas pensadas para o seu ritmo.</p>
       </div>
 
