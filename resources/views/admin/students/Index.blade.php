@@ -17,8 +17,8 @@
         <a href="{{ route('admin.dashboard') }}" class="nav__link">Painel</a>
         <a href="{{ route('admin.students.index') }}" class="nav__link nav__link--active">Alunos</a>
         <a href="{{ route('admin.materials.index') }}" class="nav__link">Materiais</a>
-        <a href="#" class="nav__link">Cronograma</a>
-        <a href="#" class="nav__link">Boletins</a>
+        <a href="{{ route('admin.schedules.index') }}" class="nav__link">Cronograma</a>
+        <a href="{{ route('admin.grades.index') }}" class="nav__link">Boletins</a>
       </nav>
 
       <div class="header__actions">
@@ -94,6 +94,8 @@
                   </form>
                 </td>
                 <td style="padding: 14px 20px; white-space:nowrap;">
+                  <a href="{{ route('admin.schedules.show', $student) }}" style="color: var(--color-ink); font-weight:600; margin-right: 14px;">Cronograma</a>
+                  <a href="{{ route('admin.grades.show', $student) }}" style="color: var(--color-ink); font-weight:600; margin-right: 14px;">Boletim</a>
                   <a href="{{ route('admin.students.edit', $student) }}" style="color: var(--color-ink); font-weight:600; margin-right: 14px;">Editar</a>
                   <form method="POST" action="{{ route('admin.students.destroy', $student) }}" style="display:inline;"
                     onsubmit="return confirm('Remover {{ $student->name }}? Essa ação não pode ser desfeita.');">

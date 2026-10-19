@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meus Materiais | English School</title>
+  <title>Meus Materiais | Learn English with Fernanda Ceciliato</title>
   <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 </head>
 <body>
@@ -15,9 +15,9 @@
 
       <nav class="nav" id="nav">
         <a href="{{ route('dashboard') }}" class="nav__link">Minha Área</a>
-        <a href="#" class="nav__link">Cronograma</a>
+        <a href="{{ route('cronograma.index') }}" class="nav__link">Cronograma</a>
         <a href="{{ route('materiais.index') }}" class="nav__link nav__link--active">Materiais</a>
-        <a href="#" class="nav__link">Boletim</a>
+        <a href="{{ route('boletim.index') }}" class="nav__link">Boletim</a>
       </nav>
 
       <div class="header__actions">
